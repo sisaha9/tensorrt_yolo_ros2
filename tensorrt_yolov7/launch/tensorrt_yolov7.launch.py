@@ -16,14 +16,14 @@ def generate_launch_description():
     package_name = "tensorrt_yolov7"
 
     engine_path = os.path.join(get_package_share_directory(package_name), "engines", ".gitkeep")
-    config = os.path.join(get_package_share_directory(package_name), "param", "tensorrt_yolov7.param.yaml")
+    config = os.path.join(get_package_share_directory(package_name), "param", f"{package_name}.param.yaml")
 
     return LaunchDescription(
         [
             declare_use_sim_time_cmd,
             Node(
-                package="tensorrt_yolov7",
-                executable="tensorrt_yolov7_node_exe",
+                package=package_name,
+                executable=f"{package_name}_node_exe",
                 parameters=[config, use_sim_time, {"engine_path": engine_path}],
                 remappings=[
                     ("in/image", "/vimba_front_left_center/image"),
