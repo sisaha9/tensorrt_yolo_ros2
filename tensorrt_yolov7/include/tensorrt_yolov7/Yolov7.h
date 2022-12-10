@@ -35,7 +35,6 @@
 #include "NvInfer.h"
 #include <vector>
 #include <NvInferPlugin.h>
-#include <tools.h>
 #include <fstream>
 #include <algorithm>
 #include <numeric>
@@ -44,6 +43,8 @@
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
+
+#include "tensorrt_yolov7/tools.h"
 
 class Yolov7 {
 public:
@@ -93,7 +94,7 @@ public:
     //! \param bgr_img The images need to be drawed with boxes
     //! \param nmsresult nms result get from PostProcess function
     //!
-    static int Yolov7::DrawBoxesonGraph(cv::Mat &bgr_img, std::vector<std::vector<float>> nmsresult);
+    static int DrawBoxesonGraph(cv::Mat &bgr_img, std::vector<std::vector<float>> nmsresult);
 
     //!
     //! \brief preprocess a list of image for validate mAP on coco dataset! the model must have a [batchsize, 3, 672, 672] input

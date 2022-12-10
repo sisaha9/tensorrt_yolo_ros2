@@ -23,7 +23,7 @@
  */
 
 
-#include "Yolov7.h"
+#include "tensorrt_yolov7/Yolov7.h"
 
 static const char* cocolabels[] = {
     "person", "bicycle", "car", "motorcycle", "airplane",
