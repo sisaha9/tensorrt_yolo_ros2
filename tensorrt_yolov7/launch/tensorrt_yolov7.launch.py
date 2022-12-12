@@ -15,14 +15,16 @@ def generate_launch_description():
 
     package_name = "tensorrt_yolov7"
 
-    engine_path = os.path.join(get_package_share_directory(package_name), "engines", ".gitkeep")
+    engine_path = os.path.join(get_package_share_directory(package_name), "engines", "yolov7PTQ.engine")
     config = os.path.join(get_package_share_directory(package_name), "param", f"{package_name}.param.yaml")
+    print(config)
 
     return LaunchDescription(
         [
             declare_use_sim_time_cmd,
             Node(
                 package=package_name,
+                output="screen",
                 executable=f"{package_name}_node_exe",
                 parameters=[config, use_sim_time, {"engine_path": engine_path}],
                 remappings=[

@@ -33,7 +33,7 @@ TensorRTYolov7Ros2Node::TensorRTYolov7Ros2Node(const rclcpp::NodeOptions & optio
   auto sensor_msgs_qos = rclcpp::QoS(rclcpp::QoSInitialization(qos_profile.history, 1), qos_profile);
 
   input_image_sub_ = this->create_subscription<sensor_msgs::msg::Image>(
-      "in/image", sensor_msgs_qos,
+      "in/image", rclcpp::QoS{1},
       std::bind(&TensorRTYolov7Ros2Node::image_callback, this, std::placeholders::_1));
   
   detection_image_publisher_ = this->create_publisher<sensor_msgs::msg::Image>(
@@ -48,6 +48,7 @@ TensorRTYolov7Ros2Node::TensorRTYolov7Ros2Node(const rclcpp::NodeOptions & optio
 
   params_callback_handle_ = this->add_on_set_parameters_callback(
     std::bind(&TensorRTYolov7Ros2Node::param_callback, this, std::placeholders::_1));
+  
 }
 
 rcl_interfaces::msg::SetParametersResult TensorRTYolov7Ros2Node::param_callback(
